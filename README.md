@@ -1,0 +1,2 @@
+A FastAPI-based Bitcoin microservice integrated with AWS services, containerized with Docker, and deployable to Kubernetes (EKS).
+This service is designed for Bitcoin-related operations, AWS integration, and future Lightning Network support.

@@ -1,0 +1,42 @@
+replicaCount: 1
+
+image:
+  repository: 304534109504.dkr.ecr.us-east-1.amazonaws.com/aws-bitcoin-microservice
+  tag: latest
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 8000
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+env:
+  - name: AWS_ACCESS_KEY_ID
+    valueFrom:
+      secretKeyRef:
+        name: aws-credentials
+        key: accesskeyid
+  - name: AWS_SECRET_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: aws-credentials
+        key: secretaccesskey
+        
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 75
+
+  serviceAccount:
+  create: false 
+  automount: true
+  annotations: {}

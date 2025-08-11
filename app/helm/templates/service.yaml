@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-bitcoin-microservice
+  labels:
+    app: aws-bitcoin-microservice
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: aws-bitcoin-microservice
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
