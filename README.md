@@ -23,3 +23,45 @@ The goal is to demonstrate platform-level thinking — how applications behave w
 - Designing deployable services for Kubernetes rather than localhost execution
 - Modeling production-style service boundaries
 - Integrating external networks into cloud-native architectures
+
+
+## Architecture Overview
+
+The service acts as a bridge between cloud-native workloads and an external blockchain network.
+
+It runs inside Kubernetes while communicating with independent systems that exist outside the cluster’s lifecycle (Bitcoin & Lightning nodes).
+
+This models a real infrastructure scenario: stateless services coordinating with persistent distributed networks.
+
+
+                 ┌────────────────────────────┐
+                 │        Client / User       │
+                 └─────────────┬──────────────┘
+                               │ HTTP API
+                               ▼
+                ┌─────────────────────────────────┐
+                │   FastAPI Service (Container)   │
+                │  Stateless Kubernetes Workload  │
+                └─────────────┬───────────────────┘
+                              │
+                              │ Service Networking
+                              ▼
+        ┌──────────────────────────────────────────────┐
+        │               Kubernetes Cluster              │
+        │  - Pod Scheduling                             │
+        │  - Secrets / ConfigMaps                       │
+        │  - Helm Deployment                            │
+        └─────────────┬──────────────┬────────────────┘
+                      │              │
+                      │              │
+                      ▼              ▼
+        ┌──────────────────┐   ┌──────────────────────┐
+        │  Bitcoin Node    │   │     AWS Services     │
+        │ (Persistent Net) │   │  (S3 / IAM / APIs)   │
+        └──────────────────┘   └──────────────────────┘
+                      │
+                      ▼
+            ┌────────────────────┐
+            │ Lightning Network  │
+            │   Future Layer     │
+            └────────────────────┘
