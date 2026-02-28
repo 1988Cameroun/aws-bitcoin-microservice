@@ -14,3 +14,12 @@ The goal is to demonstrate platform-level thinking — how applications behave w
 - Designing deployable infrastructure rather than local development scripts
 - Modeling real-world operational boundaries
 - Preparing services for Lightning Network expansion
+
+
+## Engineering Problems Explored
+
+- Communicating with stateful blockchain nodes from stateless containers
+- Handling credentials and configuration across environments
+- Designing deployable services for Kubernetes rather than localhost execution
+- Modeling production-style service boundaries
+- Integrating external networks into cloud-native architectures
